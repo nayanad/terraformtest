@@ -22,7 +22,7 @@ resource "aws_instance" "example" {
 
 resource "aws_security_group" "instance" {
   name = "SGTest"
-  ingress {
+  dynamic "ingress" {
     for_each = toset(local.ports_in)
     content{
       description = "Http add"
@@ -32,10 +32,5 @@ resource "aws_security_group" "instance" {
       cidr_blocks = ["0.0.0.0/0"]
     }
   }
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+  
 }
