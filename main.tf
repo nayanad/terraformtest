@@ -3,8 +3,8 @@ provider "aws" {
 }
 
 resource "aws_instance" "example" {
-  ami           =  "ami-024fc608af8f886bc" 
-  instance_type = "t2.micro"
+  ami                    = "ami-024fc608af8f886bc"
+  instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.instance.id]
 
   user_data = <<-EOF
@@ -16,7 +16,7 @@ resource "aws_instance" "example" {
   user_data_replace_on_change = true
 
   tags = {
-   Name = "NayanaTerraform"
+    Name = "NayanaTerraform"
   }
 }
 
@@ -24,7 +24,7 @@ resource "aws_security_group" "instance" {
   name = "SGTest"
   dynamic "ingress" {
     for_each = toset(local.ports_in)
-    content{
+    content {
       description = "Http add"
       from_port   = ingress.value
       to_port     = ingress.value
@@ -32,5 +32,5 @@ resource "aws_security_group" "instance" {
       cidr_blocks = ["0.0.0.0/0"]
     }
   }
-  
+
 }
