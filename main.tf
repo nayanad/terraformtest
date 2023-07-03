@@ -16,7 +16,7 @@ resource "aws_instance" "example" {
   user_data_replace_on_change = true
 
   tags = {
-    Name = "NayanaTerraform"
+    Name = var.instance_name
   }
 }
 
